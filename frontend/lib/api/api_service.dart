@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/clima_models.dart';
 
 // ATENÇÃO: COLOQUE O IP DA SUA API GO AQUI!
-const String baseUrl = 'http://26.33.184.131:8080';
+const String baseUrl = 'http://00.00.000.000:8080';
 
 Future<List<ClimaAtual>> fetchClimasAtuais() async {
   final response = await http.get(Uri.parse('$baseUrl/clima/all'));
