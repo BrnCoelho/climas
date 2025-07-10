@@ -63,3 +63,28 @@ Este projeto não utiliza modelos de Inteligência Artificial.
 
 🧪 Testes Automatizados e CI/CD
 O ambiente de desenvolvimento foi padronizado utilizando Docker e Docker Compose para o banco de dados PostgreSQL, garantindo consistência na execução do backend em diferentes máquinas. O projeto Flutter inclui os testes de widget padrão (test/widget_test.dart) gerados pelo framework.
+
+
+
+Módulo Rust - coleta_rust
+Este módulo é responsável por consumir dados da API HG Brasil (clima), processar e enviar os dados atualizados para o backend em Go por meio de requisições HTTP (POST e PUT).
+Funcionalidades:
+1-Realiza chamadas GET para obter o clima atual e previsões dos 6 dias.
+2-Envia os dados do clima atual via POST para a API Go e armazena o ID retornado.
+3-Envia cada previsão via POST, vinculando-a ao clima atual pelo ID.
+4-Armazena os IDs retornados (clima e previsões) para atualizações futuras.
+5-A cada X segundos(configurado pelo código), realiza novas requisições para atualizar os dados (PUT), utilizando os IDs já armazenados.
+6-Os dados enviados seguem o formato esperado pela API Go (em JSON).
+
+Estrutura:
+main.rs: Código principal que executa o loop de coleta e atualização.
+cargo.toml: configuração das dependencies
+
+Utiliza:
+-reqwest para requisições HTTP.
+-tokio para programação assíncrona.
+-serde para serialização e deserialização de JSON.
+-std::collections::HashMap para controle local de IDs.
+
+Observação:
+Para ambientes onde os dados já existem no banco de dados, o código permite comentar o trecho de POST e definir manualmente os IDs para continuar apenas com as atualizações (PUT). Isso evita duplicação de dados em bancos pequenos ou de teste.
