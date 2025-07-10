@@ -93,7 +93,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                 condicao: api_response.results.description.clone(),
             };
 
-            let clima_post_url = "http://26.33.184.131:8080/clima";
+            let clima_post_url = "http://00.00.000.000:8080/clima"; //O ip foi modificado 
             let clima_response = client.post(clima_post_url).json(&clima).send().await?;
             if !clima_response.status().is_success() {
                 println!("Erro ao adicionar clima atual: {:?}", clima_response.text().await?);
