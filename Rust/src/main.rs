@@ -104,7 +104,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
             let id_clima_atual = clima_result["id"].as_i64().unwrap() as i32;
             ids_clima.insert(city_name.to_string(), id_clima_atual);
 
-            let previsao_post_url = "http://26.33.184.131:8080/previsao";
+            let previsao_post_url = "http://00.00.000.000:8080/previsao";//O ip foi modificado 
             let mut previsoes_ids = Vec::new();
 
             for forecast in api_response.results.forecast.iter().take(6) {
@@ -175,7 +175,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     condicao: api_response.results.description.clone(),
                 };
 
-                let put_clima_url = format!("http://26.33.184.131:8080/clima/{}", id_clima);
+                let put_clima_url = format!("http://00.00.000.000:8080/clima/{}", id_clima);//O ip foi modificado 
                 client.put(&put_clima_url).json(&clima).send().await?;
 
                 if let Some(ids_prev) = ids_previsao.get(&cidade.to_string()) {
@@ -189,7 +189,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                                 id_clima_atual: id_clima,
                             };
 
-                            let put_prev_url = format!("http://26.33.184.131:8080/previsao/{}", id_prev);
+                            let put_prev_url = format!("http://00.00.000.000:8080/previsao/{}", id_prev);//O ip foi modificado 
                             client.put(&put_prev_url).json(&previsao).send().await?;
                         }
                     }
